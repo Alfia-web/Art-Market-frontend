@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item-->
+<!--        android:id="@+id/action_edit"-->
+<!--        android:title="Главная"-->
+<!--        app:showAsAction="never" />-->
+<!--    <item-->
+<!--        android:id="@+id/action_edit"-->
+<!--        android:title="Личный кабинет"-->
+<!--        app:showAsAction="never" />-->
+<!--    </item>-->
+<!--    <item-->
+<!--        android:id="@+id/action_micro"-->
+<!--        android:title="Личный кабинет"-->
+<!--        android:icon="@drawable/icon_chel"-->
+<!--        app:showAsAction="always"/>-->
+</menu>
