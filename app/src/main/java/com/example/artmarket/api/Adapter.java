@@ -65,7 +65,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
             intent.putExtra("image_url", pathImage);
             intent.putExtra("id", img.getId());
-            intent.putExtra("name", img.getAuthor());
+            intent.putExtra("name", img.getNameImage());
             intent.putExtra("author",img.getAuthor());
             intent.putExtra("width", img.getWidth());
             intent.putExtra("height", img.getHeight());

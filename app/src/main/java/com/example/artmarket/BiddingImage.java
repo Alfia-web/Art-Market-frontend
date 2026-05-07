@@ -1,5 +1,7 @@
 package com.example.artmarket;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,26 +88,28 @@ public class BiddingImage extends AppCompatActivity {
         String author = getIntent().getStringExtra("author");
         int width = getIntent().getIntExtra("width", 0);
         int height = getIntent().getIntExtra("height",0);
+
+        txtName.setText(name != null ? name : "хз");
+        txtAuthor.setText(author);
+        txtWidth.setText(String.valueOf(width));
+        txtHeight.setText(String.valueOf(height));
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, genres);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGenre.setAdapter(adapter);
+
         String genre = getIntent().getStringExtra("genre");
         if (genre == null) genre = "";
-        genre = genre.trim();
 
-        txtName.setText(name);
-        txtAuthor.setText(author);
-        txtWidth.setText(String.valueOf(width));
-        txtHeight.setText(String.valueOf(height));
         for (int i = 0; i < genresValues.length; i++) {
-            if (genresValues[i].equalsIgnoreCase(genre)) {
+            if (genresValues[i].equalsIgnoreCase(genre.trim())) {
                 spinnerGenre.setSelection(i);
                 break;
             }
         }
-
+        spinnerGenre.setOnTouchListener((v, event) -> true);
         disableEdit(txtName);
         disableEdit(txtAuthor);
         disableEdit(txtWidth);
