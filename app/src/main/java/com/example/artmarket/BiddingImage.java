@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class BiddingImage extends AppCompatActivity {
     private TextInputEditText txtWidth;
     private TextInputEditText txtHeight;
     private Spinner spinnerGenre;
+    ImageButton btnBack;
 
     private void disableEdit(TextInputEditText e) {
         e.setKeyListener(null);
@@ -64,6 +66,10 @@ public class BiddingImage extends AppCompatActivity {
     protected void onCreate(Bundle savedInsanseState){
         super.onCreate(savedInsanseState);
         setContentView(R.layout.bidding_image);
+
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v ->
+                finish());
 
         imgPreview = findViewById(R.id.imagePreviewBid);
         txtName = findViewById(R.id.editNameImageBid);

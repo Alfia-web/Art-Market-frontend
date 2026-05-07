@@ -1,121 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="14dp"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Фото картины"
-        android:textSize="16sp"
-        android:layout_marginBottom="10dp"/>
-
-    <com.google.android.material.card.MaterialCardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp">
+        android:layout_height="match_parent"
+        android:padding="14dp">
 
-        <ImageView
-            android:id="@+id/imagePreviewBid"
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_media_previous"
+            android:contentDescription="Back"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="6dp"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"/>
+            android:layout_height="match_parent"
+            android:layout_below="@id/btnBack"
+            android:padding="14dp"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
-    </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-    <Button
-        android:id="@+id/btnPickImageBid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Загрузить картину"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/reg_botton"
-        android:backgroundTint="@null"
-        android:layout_marginBottom="12dp"/>
+                <ImageView
+                    android:id="@+id/imagePreviewBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Название картины"
-        android:layout_marginBottom="10dp">
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editNameImageBid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reg_text_fild"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/btnPickImageBid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Загрузить картину"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/reg_botton"
+                android:backgroundTint="@null"
+                android:layout_marginBottom="12dp"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Автор"
-        android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Название картины"
+                android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editAuthorBid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reg_text_fild"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editNameImageBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/reg_text_fild"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Высота (см)"
-        android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Автор"
+                android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editHeightBid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:background="@drawable/reg_text_fild"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editAuthorBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/reg_text_fild"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ширина (см)"
-        android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Высота (см)"
+                android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editWidthBid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:background="@drawable/reg_text_fild"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editHeightBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:background="@drawable/reg_text_fild"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Жанр"
-        android:textSize="14sp"
-        android:textColor="#9E9E9E"
-        android:layout_marginBottom="6dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ширина (см)"
+                android:layout_marginBottom="10dp">
 
-    <Spinner
-        android:id="@+id/spinnerGenresBid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/reg_text_fild"
-        android:layout_marginBottom="12dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editWidthBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:background="@drawable/reg_text_fild"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnSubmitBid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Добавить картину"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/reg_botton"
-        android:backgroundTint="@null"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Жанр"
+                android:textSize="14sp"
+                android:textColor="#9E9E9E"
+                android:layout_marginBottom="6dp"/>
 
-</LinearLayout>
+            <Spinner
+                android:id="@+id/spinnerGenresBid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/reg_text_fild"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnSubmitBid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Добавить картину"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/reg_botton"
+                android:backgroundTint="@null"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
