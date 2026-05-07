@@ -90,13 +90,6 @@ public class SignUpActivity extends Fragment {
         button.setEnabled(false);
         button.setAlpha(0.5f);
 
-
-
         return view;
-
-
     }
-
-
-
 }

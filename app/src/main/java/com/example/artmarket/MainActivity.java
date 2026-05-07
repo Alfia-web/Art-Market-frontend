@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -40,17 +41,19 @@ import com.google.android.material.navigation.NavigationBarView;
             setContentView(R.layout.activity_main);
 
             SharedPreferences sp = getSharedPreferences("PC", Context.MODE_PRIVATE);
-            bottomNav = findViewById(R.id.bottomNav);
-            boolean hasAccount = sp.getString("TY", "-9").equals("-9");
+            String savedTY = sp.getString("TY", "-9");
+            Toast.makeText(this, "TY = " + savedTY, Toast.LENGTH_LONG).show(); // ← сюда
 
-            if (!hasAccount) {
+            bottomNav = findViewById(R.id.bottomNav);
+            boolean isLoggedIn = !savedTY.equals("-9");
+
+            if (!isLoggedIn) {
                 bottomNav.setVisibility(View.GONE);
                 replaceFragment(registFragment);
             } else {
                 replaceFragment(homeFragment);
                 showMainMenu();
             }
-
             //TextView signuptext = findViewById(R.id.signuptext);
 
             bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

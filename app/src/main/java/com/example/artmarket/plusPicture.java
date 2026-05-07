@@ -121,6 +121,11 @@ public class plusPicture extends Fragment {
                         @Override
                         public void onResponse(retrofit2.Call<Image> call,
                                                retrofit2.Response<Image> response) {
+                            android.util.Log.d("ADD_IMAGE", "code=" + response.code());
+                            try {
+                                android.util.Log.d("ADD_IMAGE", "error=" + response.errorBody().string());
+                            } catch (Exception e) {}
+
                             if (response.isSuccessful()) {
                                 Toast.makeText(requireContext(), "Добавлено!", Toast.LENGTH_SHORT).show();
                             } else {
@@ -130,7 +135,8 @@ public class plusPicture extends Fragment {
 
                         @Override
                         public void onFailure(retrofit2.Call<Image> call, Throwable t) {
-                            Toast.makeText(requireContext(), "Ошибка сети", Toast.LENGTH_SHORT).show();
+                            android.util.Log.e("ADD_IMAGE", "Ошибка: " + t.getMessage());
+                            Toast.makeText(requireContext(), "Ошибка сети: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -171,6 +177,17 @@ public class plusPicture extends Fragment {
                             if (response.isSuccessful()) {
                                 Toast.makeText(requireContext(), "Изменено!", Toast.LENGTH_SHORT).show();
                             } else {
+                                try {
+                                    String error = response.errorBody() != null
+                                            ? response.errorBody().string()
+                                            : "null";
+
+                                    android.util.Log.d("ADD_IMAGE", "error=" + error);
+
+                                } catch (IOException e) {
+                                    android.util.Log.e("ADD_IMAGE", "Ошибка чтения errorBody");
+                                }
+
                                 Toast.makeText(requireContext(), "Ошибка: " + response.code(), Toast.LENGTH_SHORT).show();
                             }
                         }

@@ -90,19 +90,24 @@ public class regist extends Fragment {
 
                         if (response.isSuccessful() && response.body() != null) {
                             String body = response.body();
-
-                            String userId = body.replace("OK", "")
+                            if(body.startsWith("OK")){
+                                String userId = body.replace("OK", "")
                                     .replace("ОК", "").trim();
 
-                            SharedPreferences sp = requireActivity()
-                                    .getSharedPreferences("PC", Context.MODE_PRIVATE);
-                            sp.edit().putString("TY", userId).apply();
+                                if (!userId.isEmpty()) {
+                                    SharedPreferences sp = requireActivity()
+                                            .getSharedPreferences("PC", Context.MODE_PRIVATE);
+                                    sp.edit().putString("TY", userId).apply();
 
-                            MainActivity activity = (MainActivity) getActivity();
-                                activity.showMainMenu();
-                                activity.replaceFragment(new Home());
-                        } else {
-                            Toast.makeText(getContext(), "Ошибка входа", Toast.LENGTH_SHORT).show();
+                                    MainActivity activity = (MainActivity) getActivity();
+                                    activity.showMainMenu();
+                                    activity.replaceFragment(new Home());
+                                } else {
+                                    Toast.makeText(getContext(), "Ошибка: пустой userId", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "Ошибка входа: " + body, Toast.LENGTH_SHORT).show();
+                            }
                         }
                         Log.d("LOGIN", "code=" + response.code());
                         Log.d("LOGIN", "error=" + response.errorBody());
