@@ -15,8 +15,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#FFFFFF"
         app:title="Art Market"
-        app:titleTextColor="#F20000" />
-
+        app:titleTextColor="#F20000"
+        app:menu="@menu/top_menu"/>
   </com.google.android.material.appbar.AppBarLayout>
 
   <FrameLayout

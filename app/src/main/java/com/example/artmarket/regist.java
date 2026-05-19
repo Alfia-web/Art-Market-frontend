@@ -15,27 +15,29 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.artmarket.api.RetrofitClient;
+import com.example.artmarket.model.User;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class regist extends Fragment {
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_regist, container, false);
-
         EditText email = view.findViewById(R.id.editEmail);
         EditText password = view.findViewById(R.id.editPassword);
         View button = view.findViewById(R.id.regBotton);
         View signuptext = view.findViewById(R.id.signuptext);
-
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar_actionbar);
+        toolbar.setVisibility(View.GONE);
 
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -43,7 +45,8 @@ public class regist extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                boolean enabled = email.getText().length() > 0 && password.getText().length() > 0;
+                boolean enabled = email.getText().length() > 0 &&
+                        (password.getText().length() > 0 && password.getText().length() >= 6);
                 button.setEnabled(enabled);
                 button.setAlpha(enabled ? 1.0f : 0.5f);
             }
@@ -54,19 +57,12 @@ public class regist extends Fragment {
 
         email.addTextChangedListener(watcher);
         password.addTextChangedListener(watcher);
-
         button.setEnabled(false);
         button.setAlpha(0.5f);
 
         signuptext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Переход на регистрацию", Toast.LENGTH_SHORT).show();
-
-                String emailText = email.getText().toString();
-                String passwordText = password.getText().toString();
-
-                Log.d("LOGIN", "Отправляем email=" + emailText + " password=" + passwordText);
                 if (getActivity() instanceof MainActivity) {
                     ((MainActivity) getActivity()).replaceFragment(new SignUpActivity());
                 }
@@ -79,34 +75,31 @@ public class regist extends Fragment {
                 String emailText = email.getText().toString();
                 String passwordText = password.getText().toString();
 
-                button.setEnabled(false);
-
-                LoginRequest request = new LoginRequest(emailText, passwordText);
-
-                RetrofitClient.getInstance().login(request).enqueue(new Callback<String>() {
+                User user = new User(emailText, passwordText);
+                RetrofitClient.getInstance().login(user).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        button.setEnabled(true);
-
                         if (response.isSuccessful() && response.body() != null) {
                             String body = response.body();
                             if(body.startsWith("OK")){
-                                String userId = body.replace("OK", "")
-                                    .replace("ОК", "").trim();
+                                String data = body.replace("OK", "").trim();
+                                String[] parts = data.split("\\|");
+                                String userId = parts.length > 0 ? parts[0] : "";
+                                String name = (parts.length > 1 && !parts[1].isEmpty()) ? parts[1] : "Пользователь";
 
                                 if (!userId.isEmpty()) {
                                     SharedPreferences sp = requireActivity()
                                             .getSharedPreferences("PC", Context.MODE_PRIVATE);
-                                    sp.edit().putString("TY", userId).apply();
+                                    sp.edit().putString("TY", userId).putString("USERNAME", name).apply();
 
                                     MainActivity activity = (MainActivity) getActivity();
                                     activity.showMainMenu();
                                     activity.replaceFragment(new Home());
-                                } else {
+                                                                } else {
                                     Toast.makeText(getContext(), "Ошибка: пустой userId", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getContext(), "Ошибка входа: " + body, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),  body, Toast.LENGTH_SHORT).show();
                             }
                         }
                         Log.d("LOGIN", "code=" + response.code());
@@ -121,7 +114,6 @@ public class regist extends Fragment {
                 });
             }
         });
-
         return view;
     }
 }

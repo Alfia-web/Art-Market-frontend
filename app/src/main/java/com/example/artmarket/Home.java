@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.artmarket.api.Adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,24 +43,20 @@ public class Home extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
+        List<Image> imageList = new ArrayList<>();
+        Adapter adapter = new Adapter(imageList);
+        recyclerView.setAdapter(adapter);
+
         RetrofitClient.getInstance().getImages().enqueue(new Callback<List<Image>>() {
             @Override
             public void onResponse(Call<List<Image>> call, Response<List<Image>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        List<Image> images = response.body();
-
-                        if (images != null) {
-                            Adapter adapter = new Adapter(images);
-                            recyclerView.setAdapter(adapter);
-                        }
-                        Log.d("API", "Получено: " + images.size());
-                    }
+                if (response.isSuccessful() && response.body() != null) {
+                    adapter.setData(response.body());
+                }
             }
-
             @Override
             public void onFailure(Call<List<Image>> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("API", "Ошибка: " + t.getMessage());
+                Log.e("HOME", "Ошибка: " + t.getMessage());
             }
         });
 

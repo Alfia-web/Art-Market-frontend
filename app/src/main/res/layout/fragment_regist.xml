@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    android:padding="26dp"
-    android:gravity="center_horizontal">
+    android:padding="50dp"
+    android:gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,8 +14,8 @@
         android:text="Добро пожаловать!"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:textColor="#FFE53935"/>
 
     <EditText
         android:id="@+id/editEmail"
@@ -24,7 +24,7 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/reg_text_fild"
         android:gravity="center"
-        android:hint="Email"/>
+        android:hint="Login"/>
 
     <EditText
         android:id="@+id/editPassword"
@@ -52,9 +52,7 @@
         android:text="Нет аккаунта? Зарегистрируйтесь"
         android:clickable="true"
         android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        android:textColor="#0B0B0B"
+        android:textColor="#FF212121"
         android:textSize="15sp"
         android:layout_marginTop="10dp"/>
-
 </LinearLayout>

@@ -46,7 +46,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
             bottomNav = findViewById(R.id.bottomNav);
             boolean isLoggedIn = !savedTY.equals("-9");
-
+            Toolbar toolbar = findViewById(R.id.toolbar_actionbar);
             if (!isLoggedIn) {
                 bottomNav.setVisibility(View.GONE);
                 replaceFragment(registFragment);
@@ -54,7 +54,6 @@ import com.google.android.material.navigation.NavigationBarView;
                 replaceFragment(homeFragment);
                 showMainMenu();
             }
-            //TextView signuptext = findViewById(R.id.signuptext);
 
             bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
                 @Override
@@ -71,6 +70,17 @@ import com.google.android.material.navigation.NavigationBarView;
                     return true;
                 }
             });
+
+            toolbar.setOnMenuItemClickListener(item->{
+                if (item.getItemId()==R.id.out){
+                    sp.edit().clear().apply();
+                    replaceFragment(new regist());
+                    bottomNav.setVisibility(View.GONE);
+                    toolbar.setVisibility(View.GONE);
+                    return true;
+                }
+                return false;
+            });
         }
 
         public void replaceFragment(Fragment fragment){
@@ -81,21 +91,9 @@ import com.google.android.material.navigation.NavigationBarView;
         }
 
         public void showMainMenu() {
+            Toolbar toolbar = findViewById(R.id.toolbar_actionbar);
             bottomNav.setVisibility(View.VISIBLE);
+            toolbar.setVisibility(View.VISIBLE);
         }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.search) {
-//            replaceFragment(new Search());
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

@@ -26,6 +26,9 @@
         <activity
             android:name=".BiddingImage">
         </activity>
+        <activity
+            android:name=".CommentActivity"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>
